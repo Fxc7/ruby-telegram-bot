@@ -1,6 +1,6 @@
 require('telegram/bot')
 
-token = '5585425971:AAE97JMXl9Vd4gQ55kwYzErXTLyxaqGJhpY'
+token = 'YOUR_TOKEN_HERE'
 
 def command(bot, message)
   id = message.chat.id

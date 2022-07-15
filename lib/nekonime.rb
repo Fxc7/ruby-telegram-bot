@@ -21,5 +21,3 @@ class Neko
     @neko = res['neko']
   end
 end
-
-Neko.new.display_neko

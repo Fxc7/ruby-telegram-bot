@@ -1,5 +1,5 @@
 require('telegram/bot')
-require('lib/command/nekonime')
+require_relative('lib/command/nekonime')
 
 token = 'YOUR_TOKEN_HERE'
 

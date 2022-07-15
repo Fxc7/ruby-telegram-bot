@@ -1,4 +1,5 @@
 require('telegram/bot')
+require('lib/command/nekonime')
 
 token = 'YOUR_TOKEN_HERE'
 
@@ -17,6 +18,12 @@ def command(bot, message)
     client.send_message(
       chat_id: id,
       text: "Bye, #{message.from.first_name}"
+    )
+  when '/nekonime'
+    neko = Neko.new.display_neko
+    client.send_photo(
+      chat_id: id,
+      photo: neko
     )
   end
 end

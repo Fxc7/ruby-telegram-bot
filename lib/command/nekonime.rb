@@ -1,4 +1,4 @@
-require_relative '../request'
+require_relative '../helper'
 require_relative '../webUrl'
 
 class Neko

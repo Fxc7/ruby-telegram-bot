@@ -1,5 +1,5 @@
-require_relative 'request'
-require_relative 'webUrl'
+require_relative '../request'
+require_relative '../webUrl'
 
 class Neko
   def initialize

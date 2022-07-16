@@ -23,5 +23,3 @@ class Ytmp4
     @ytmp4
   end
 end
-
-Ytmp4.new.display_ytmp4('https://youtu.be/GIVqwuSetVw')

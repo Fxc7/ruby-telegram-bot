@@ -3,7 +3,7 @@ require_relative('lib/command/nekonime')
 require_relative('lib/command/ytmp3')
 require_relative('lib/command/ytmp4')
 
-token = 'YOUR_TOKEN_HERE'
+token = '5585425971:AAE97JMXl9Vd4gQ55kwYzErXTLyxaqGJhpY'
 
 $ytmp3_request = nil
 $ytmp4_request = nil
@@ -50,7 +50,8 @@ def command(bot, message)
         title = data['title']
 	thumb = data['thumb']
 	size = data['size']
-	audioUrl = data['download_video']
+	audioUrl = data['download_audio']
+	$ytmp3_request = false
 	client.send_photo(
 	  chat_id: id,
 	  photo: thumb,
@@ -75,6 +76,7 @@ def command(bot, message)
         thumb = data['thumb']
         size = data['size']
         videoUrl = data['download_video']
+	$ytmp4_request = false
         client.send_photo(
           chat_id: id,
           photo: thumb,

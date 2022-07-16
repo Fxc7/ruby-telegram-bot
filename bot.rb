@@ -1,10 +1,12 @@
 require('telegram/bot')
 require_relative('lib/command/nekonime')
 require_relative('lib/command/ytmp3')
+require_relative('lib/command/ytmp4')
 
-token = 'YOUR_TOKEN_HERE'
+token = '5585425971:AAE97JMXl9Vd4gQ55kwYzErXTLyxaqGJhpY'
 
 $ytmp3_request = nil
+$ytmp4_request = nil
 
 def command(bot, message)
   id = message.chat.id
@@ -28,9 +30,14 @@ def command(bot, message)
       chat_id: id,
       photo: neko
     )
-  end
   when '/ytmp3'
     $ytmp3_request = true
+    client.send_message(
+      chat_id: id,
+      text: "Send the youtube url!"
+    )
+  when '/ytmp4'
+    $ytmp4_request = true
     client.send_message(
       chat_id: id,
       text: "Send the youtube url!"
@@ -39,31 +46,55 @@ def command(bot, message)
     if $ytmp3_request
       url = message.text
       if url.include? "http"
-        data = Ytmp3.new.display_ytmp3(url)
+	data = Ytmp3.new.display_ytmp3(url)
         title = data['title']
+	thumb = data['thumb']
+	size = data['size']
+	audioUrl = data['download_video']
+	client.send_photo(
+	  chat_id: id,
+	  photo: thumb,
+	  caption: "- Title: #{title}\n- Size: #{size}\n\nWait a moment"
+	)
+	client.send_audio(
+	  chat_id: id,
+	  audio: audioUrl,
+	  caption: "This is your mp3."
+	)
+      else
+	client.send_message(
+	  chat_id: id,
+	  text: "Your url is invalid!"
+	)
+      end
+    elsif $ytmp4_request
+      url = message.text
+      if url.include? "http"
+	data = Ytmp4.new.display_ytmp4(url)
+	title = data['title']
         thumb = data['thumb']
         size = data['size']
-        audioUrl = data['download_audio']
+        videoUrl = data['download_video']
         client.send_photo(
           chat_id: id,
           photo: thumb,
           caption: "- Title: #{title}\n- Size: #{size}\n\nWait a moment"
         )
-        client.send_audio(
-          chat_id: id,
-          audio: audioUrl,
-          caption: "This is your mp3."
-        )
+	client.send_video(
+	  chat_id: id,
+	  video: videoUrl,
+	  caption: "This is your mp3."
+	)
       else
-        client.send_message(
+	client.send_message(
           chat_id: id,
           text: "Your url is invalid!"
         )
       end
     else
       client.send_message(
-        chat_id: id,
-        text: 'I do not recognize that command'
+	chat_id: id,
+	text: 'I do not recognize that command'
       )
     end
   end

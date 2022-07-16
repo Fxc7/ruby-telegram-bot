@@ -85,7 +85,7 @@ def command(bot, message)
 	client.send_video(
 	  chat_id: id,
 	  video: videoUrl,
-	  caption: "This is your mp3."
+	  caption: "This is your mp4."
 	)
       else
 	client.send_message(

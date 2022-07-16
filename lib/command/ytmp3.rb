@@ -13,7 +13,7 @@ class Ytmp3
   def get_ytmp3(v)
     web = "yt2/audio?url=#{v}"
     res = Request.new_request(Url.new.hadi_api(web))
-     @ytmp3 = res['result']
+    @ytmp3 = res['result']
   end
 
   public

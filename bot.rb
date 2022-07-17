@@ -1,4 +1,5 @@
 require 'telegram/bot'
+require_relative 'lib/menu'
 require_relative 'lib/command/nekonime'
 require_relative 'lib/command/ytmp3'
 require_relative 'lib/command/ytmp4'
@@ -12,17 +13,18 @@ def command(bot, message)
   id = message.chat.id
 
   client = bot.api
+  firstname = message.from.first_name
 
   case message.text
   when '/start'
     client.send_message(
       chat_id: id,
-      text: "Hello, #{message.from.first_name}"
+      text: Menu.new_menu(fistname)
     )
   when '/stop'
     client.send_message(
       chat_id: id,
-      text: "Bye, #{message.from.first_name}"
+      text: "Bye, #{firstname}"
     )
   when '/nekonime'
     neko = Neko.new.display_neko

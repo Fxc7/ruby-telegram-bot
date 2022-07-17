@@ -1,7 +1,7 @@
-require('telegram/bot')
-require_relative('lib/command/nekonime')
-require_relative('lib/command/ytmp3')
-require_relative('lib/command/ytmp4')
+require 'telegram/bot'
+require_relative 'lib/command/nekonime'
+require_relative 'lib/command/ytmp3'
+require_relative 'lib/command/ytmp4'
 
 token = 'YOUR_TOKEN_HERE'
 

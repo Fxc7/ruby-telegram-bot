@@ -1,10 +1,12 @@
 require 'telegram/bot'
+require 'dotenv/load'
+
 require_relative 'lib/menu'
 require_relative 'lib/command/nekonime'
 require_relative 'lib/command/ytmp3'
 require_relative 'lib/command/ytmp4'
 
-token = 'YOUR_TOKEN_HERE'
+token = ENV['TELEGRAM_TOKEN']
 
 $ytmp3_request = nil
 $ytmp4_request = nil

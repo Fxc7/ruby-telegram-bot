@@ -92,23 +92,50 @@ class Player
       pos = h["id"] == id
       inventory = @json["data"]["#{h["id"] == id}".to_i]["inventory"]
       if item == "axe"
-	if amount == nil
-	  inventory["axe"]["count"] += 1
-	else
-	  begin
-	    floated = amount.to_f
+        if amount == nil
+          inventory["axe"]["count"] += 1
+        else
+          begin
+            floated = amount.to_f
             isNaN = floated.nan?
             if isNaN
               return "Not a number!"
             end
-	  inventory["axe"]["count"] += amount
-	  rescue
-	    return "Not a number!"
-	  end
-	end
-	File.open(@src, 'w') do |f|
-	  f.puts JSON.pretty_generate(@json)
-	end
+            inventory["axe"]["count"] += amount
+            return "Added"
+          rescue
+            return "Not a number!"
+          end
+        end
+        File.open(@src, 'w') do |f|
+          f.puts JSON.pretty_generate(@json)
+        end
+      end
+    }
+  end
+  def del_item(id, item, amount)
+    @json["data"].index {|h|
+      pos = h["id"] == id
+      inventory = @json["data"]["#{h["id"] == id}".to_i]["inventory"]
+      if item == "axe"
+        if amount == nil
+          inventory["axe"]["count"] -= 1
+        else
+          begin
+            floated = amount.to_f
+            isNaN = floated.nan?
+            if isNaN
+              return "Not a number!"
+            end
+            inventory["axe"]["count"] -= amount
+            return "Deleted"
+          rescue
+            return "Not a number!"
+          end
+        end
+        File.open(@src, 'w') do |f|
+          f.puts JSON.pretty_generate(@json)
+        end
       end
     }
   end

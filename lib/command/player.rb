@@ -102,13 +102,13 @@ class Player
               return "Not a number!"
             end
             inventory["axe"]["count"] += amount
+            File.open(@src, 'w') do |f|
+              f.puts JSON.pretty_generate(@json)
+            end
             return "Added"
           rescue
             return "Not a number!"
           end
-        end
-        File.open(@src, 'w') do |f|
-          f.puts JSON.pretty_generate(@json)
         end
       end
     }
@@ -128,13 +128,13 @@ class Player
               return "Not a number!"
             end
             inventory["axe"]["count"] -= amount
+            File.open(@src, 'w') do |f|
+              f.puts JSON.pretty_generate(@json)
+            end
             return "Deleted"
           rescue
             return "Not a number!"
           end
-        end
-        File.open(@src, 'w') do |f|
-          f.puts JSON.pretty_generate(@json)
         end
       end
     }
